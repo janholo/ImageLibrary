@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="column is-fullwidth">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li *ngFor="let folder of folders; let last = last" [ngClass]="{last: last}">
+          <a href="../">{{folder}}</a>
+        </li>
+      </ul>
+    </nav>
+    <section>
+      <div class="columns is-multiline">
+        <div class="column" [ngClass]="{'is-3': isImageSize(1), 'is-2': isImageSize(0), 'is-6': isImageSize(2)}" *ngFor="let img of images">
+          <a class="box">
+            <figure>
+              <p class="has-text-grey has-text-left is-size-7">{{img.name}}</p>
+              <img src="http://via.placeholder.com/500x350" />
+            </figure>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

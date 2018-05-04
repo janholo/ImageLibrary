@@ -1,0 +1,11 @@
+.last{
+    color: #363636;
+    cursor: default;
+    pointer-events: none;
+}
+
+.last a{
+    color: #363636;
+    cursor: default;
+    pointer-events: none;
+}
