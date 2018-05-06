@@ -6,9 +6,7 @@ enum ImageSize {
   Big
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ImageSizeService {
   imageSize = ImageSize.Medium;
   isImageSize(size): boolean {
