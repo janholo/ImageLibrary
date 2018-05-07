@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 
-enum ImageSize {
+export enum ImageSize {
   Small = 0,
   Medium,
-  Big
+  Big,
+  FullSize
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ImageSizeService {
   imageSize = ImageSize.Medium;
   isImageSize(size): boolean {
@@ -16,5 +19,4 @@ export class ImageSizeService {
     this.imageSize = size;
   }
   constructor() { }
-
 }

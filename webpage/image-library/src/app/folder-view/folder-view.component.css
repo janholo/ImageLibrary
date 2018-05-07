@@ -9,3 +9,8 @@
     cursor: default;
     pointer-events: none;
 }
+
+.fillwidth {
+    min-width: 100%;
+    height: auto;
+}

@@ -6,6 +6,7 @@ import { RawViewComponent } from './raw-view/raw-view.component';
 const routes: Routes = [
   {path: '', redirectTo: '/folderview', pathMatch: 'full' },
   {path: 'folderview', component: FolderViewComponent},
+  {path: 'folderView/:folder', component: FolderViewComponent},
   {path: 'rawview', component: RawViewComponent}
 ];
 
