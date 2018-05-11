@@ -55,6 +55,18 @@ export class FolderViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    const folderUrl = this.route.snapshot.url;
+    console.log(folderUrl);
+
+    let newPath = '';
+
+    for (let i = 1; i < folderUrl.length; i++) {
+      newPath += folderUrl[i] + '/';
+    }
+
+    newPath = newPath.slice(0, -1);
+
+    this.changeFolder(newPath);
   }
 
 }

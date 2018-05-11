@@ -15,4 +15,7 @@ export class Folder {
     getPreviewPath(): string {
       return 'http://mediaserver.local/data/preview/' + this.path;
     }
+    getRouterLink(): string {
+      return '/folderview/' + this.path;
+    }
 }

@@ -3,7 +3,7 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li *ngFor="let folder of getFolderHierarchy(); let last = last" [ngClass]="{last: last}">
-          <a (click)="changeFolder(folder.path)" >{{folder.getName()}}</a>
+          <a routerLink="{{folder.getRouterLink()}}" >{{folder.getName()}}</a>
         </li>
       </ul>
     </nav>
@@ -13,9 +13,7 @@
           <a class="box" (click)="selectElement(img)">
             <figure>
               <p class="has-text-grey has-text-left is-size-7">{{img.getName()}}</p>
-              
               <img *ngIf="isSelectedImage(img)" class="fillwidth" src="{{img.getSourcePath()}}" alt="{{img.getSourcePath()}}" />
-
               <img *ngIf="!isSelectedImage(img)" class="fillwidth" src="{{img.getPreviewPath()}}" alt="{{img.getPreviewPath()}}" />
             </figure>
           </a>
