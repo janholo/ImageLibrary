@@ -1,0 +1,16 @@
+.last{
+    color: #363636;
+    cursor: default;
+    pointer-events: none;
+}
+
+.last a{
+    color: #363636;
+    cursor: default;
+    pointer-events: none;
+}
+
+.fillwidth {
+    min-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="column is-fullwidth">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li *ngFor="let folder of getFolderHierarchy(); let last = last" [ngClass]="{last: last}">
+          <a routerLink="{{folder.getRouterLink()}}" >{{folder.getName()}}</a>
+        </li>
+      </ul>
+    </nav>
+    <section>
+      <div class="columns is-multiline">
+        <div class="column" *ngFor="let img of getImages()" [ngClass]="{'is-2': isImageSize(0,img), 'is-3': isImageSize(1,img), 'is-6': isImageSize(2,img), 'is-12': isImageSize(3,img)}" >
+          <a class="box" (click)="selectElement(img)">
+            <figure>
+              <p class="has-text-grey has-text-left is-size-7">{{img.getName()}}</p>
+              <img *ngIf="isSelectedImage(img)" class="fillwidth" src="{{img.getSourcePath()}}" alt="{{img.getSourcePath()}}" />
+              <img *ngIf="!isSelectedImage(img)" class="fillwidth" src="{{img.getPreviewPath()}}" alt="{{img.getPreviewPath()}}" />
+            </figure>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
