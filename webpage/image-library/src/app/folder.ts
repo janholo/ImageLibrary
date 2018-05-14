@@ -1,7 +1,9 @@
+import { DataUriService } from './data-uri.service';
+
 export class Folder {
     path: string;
     isRoot: boolean;
-    constructor(p: string, root: boolean = false) {
+    constructor(private dataUriService: DataUriService, p: string, root: boolean = false) {
       this.path = p;
       this.isRoot = root;
     }
@@ -13,7 +15,7 @@ export class Folder {
       return l[l.length - 1];
     }
     getPreviewPath(): string {
-      return 'http://mediaserver.local/data/preview/' + this.path;
+      return this.dataUriService.getDataUri() + '/preview/' + this.path;
     }
     getRouterLink(): string {
       return '/folderview/' + this.path;

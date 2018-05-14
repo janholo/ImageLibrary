@@ -3,6 +3,7 @@ import { empty } from 'rxjs';
 import { Image, ImageType } from './image';
 import { FolderInfoLoaderService } from './folder-info-loader.service';
 import { FolderHierarchyService } from './folder-hierarchy.service';
+import { DataUriService } from './data-uri.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ImageService {
     const baseFolder = this.folderHierarchy.getCurrentFolder().path + '/';
 
     this.folderInfo.info.subDirectories.forEach(folder => {
-      images.push(new Image(baseFolder + folder, ImageType.Folder));
+      images.push(new Image(this.dataUriService, baseFolder + folder, ImageType.Folder));
     });
 
     this.folderInfo.info.files.forEach(file => {
@@ -23,9 +24,9 @@ export class ImageService {
           || file.toLowerCase().endsWith('png')
           || file.toLowerCase().endsWith('gif')
           || file.toLowerCase().endsWith('bmp')) {
-        images.push(new Image(baseFolder + file, ImageType.Image));
+        images.push(new Image(this.dataUriService, baseFolder + file, ImageType.Image));
       } else {
-        images.push(new Image(baseFolder + file, ImageType.Other));
+        images.push(new Image(this.dataUriService, baseFolder + file, ImageType.Other));
       }
 
     });
@@ -33,5 +34,7 @@ export class ImageService {
     return images;
   }
 
-  constructor(private folderInfo: FolderInfoLoaderService, private folderHierarchy: FolderHierarchyService) { }
+  constructor(private folderInfo: FolderInfoLoaderService,
+              private folderHierarchy: FolderHierarchyService,
+              private dataUriService: DataUriService) { }
 }

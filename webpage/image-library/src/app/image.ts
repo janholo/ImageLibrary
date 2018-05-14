@@ -1,3 +1,5 @@
+import { DataUriService } from './data-uri.service';
+
 export enum ImageType {
     Folder = 0,
     Image,
@@ -7,7 +9,7 @@ export enum ImageType {
 export class Image {
     path: string;
     type: ImageType;
-    constructor(path: string, type: ImageType) {
+    constructor(private dataUriService: DataUriService, path: string, type: ImageType) {
         this.path = path;
         this.type = type;
       }
@@ -18,14 +20,14 @@ export class Image {
             return './assets/file.png';
         }
 
-        return 'http://mediaserver.local/data/preview/' + this.path;
+        return this.dataUriService.getDataUri() + '/preview/' + this.path;
     }
     getSourcePath(): string {
         if (this.type === ImageType.Folder) {
             return null;
         }
 
-        return 'http://mediaserver.local/data/images/' + this.path;
+        return this.dataUriService.getDataUri() + '/images/' + this.path;
 
     }
     getName(): string {
