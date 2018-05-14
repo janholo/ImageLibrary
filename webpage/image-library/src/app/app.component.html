@@ -2,7 +2,7 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" routerLink="/">
-        <img src="../assets/icon.png" alt="Logo"> {{title}}
+        <img src="./assets/icon.png" alt="Logo"> {{title}}
       </a>
       <div class="navbar-burger burger" data-target="navMenu">
         <span></span>
@@ -21,14 +21,14 @@
       </div>
       <div class="navbar-end">
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(0)}" (click)="setImageSize(0)">
-          <img src="../assets/small-image.png" alt="Small">
+          <img src="./assets/small-image.png" alt="Small">
         </a>
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(1)}" (click)="setImageSize(1)">
-          <img src="../assets/medium-image.png" alt="Medium">
+          <img src="./assets/medium-image.png" alt="Medium">
         </a>
 
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(2)}" (click)="setImageSize(2)">
-          <img src="../assets/big-image.png" alt="Big">
+          <img src="./assets/big-image.png" alt="Big">
         </a>
       </div>
     </div>

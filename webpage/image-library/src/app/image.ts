@@ -13,9 +13,9 @@ export class Image {
       }
     getPreviewPath(): string {
         if (this.type === ImageType.Folder) {
-            return '../assets/folder.png';
+            return './assets/folder.png';
         } else if (this.type === ImageType.Other) {
-            return '../assets/file.png';
+            return './assets/file.png';
         }
 
         return 'http://mediaserver.local/data/preview/' + this.path;
