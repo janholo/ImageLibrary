@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Folder } from './folder';
 import { FolderInfoLoaderService } from './folder-info-loader.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,18 @@ export class FolderHierarchyService {
     this.infoLoader.load(this.getCurrentFolder());
   }
 
-
-  constructor(private infoLoader: FolderInfoLoaderService) {
+  constructor(private infoLoader: FolderInfoLoaderService,
+              private router: Router) {
     this.changeFolder('');
+
+    router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        const folderViewPrefixUrl = '/folderview';
+        if (val.urlAfterRedirects.startsWith(folderViewPrefixUrl)) {
+          const folderUrl = val.urlAfterRedirects.replace(folderViewPrefixUrl, '');
+          this.changeFolder(folderUrl);
+        }
+      }
+    });
    }
 }
