@@ -11,7 +11,7 @@ export enum ImageSize {
   providedIn: 'root',
 })
 export class ImageSizeService {
-  imageSize = ImageSize.Medium;
+  private imageSize = ImageSize.Medium;
   isImageSize(size): boolean {
     return size === this.imageSize;
   }

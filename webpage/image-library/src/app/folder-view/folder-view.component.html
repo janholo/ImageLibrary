@@ -8,7 +8,7 @@
       </ul>
     </nav>
     <section>
-      <div class="columns is-multiline">
+      <div class="columns is-mobile is-multiline">
         <div class="column" *ngFor="let img of getImages()" [ngClass]="{'is-2': isImageSize(0,img), 'is-3': isImageSize(1,img), 'is-6': isImageSize(2,img), 'is-12': isImageSize(3,img)}" >
           <a class="box" (click)="selectElement(img)">
             <figure>

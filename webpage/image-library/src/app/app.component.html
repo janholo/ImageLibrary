@@ -19,18 +19,28 @@
           Raw View
         </a>
       </div>
-      <div class="navbar-end">
+      <div class="navbar-end is-hidden-touch">
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(0)}" (click)="setImageSize(0)">
           <img src="./assets/small-image.png" alt="Small">
         </a>
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(1)}" (click)="setImageSize(1)">
           <img src="./assets/medium-image.png" alt="Medium">
         </a>
-
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(2)}" (click)="setImageSize(2)">
           <img src="./assets/big-image.png" alt="Big">
-        </a>
+        </a>    
       </div>
+      <div class="navbar-end is-hidden-desktop">
+        <a class="navbar-item" [ngClass]="{'is-active': isImageSize(1)}" (click)="setImageSize(1)">
+          <img src="./assets/small-image.png" alt="Small">
+        </a>
+        <a class="navbar-item" [ngClass]="{'is-active': isImageSize(2)}" (click)="setImageSize(2)">
+          <img src="./assets/medium-image.png" alt="Medium">
+        </a>
+        <a class="navbar-item" [ngClass]="{'is-active': isImageSize(3)}" (click)="setImageSize(3)">
+          <img src="./assets/big-image.png" alt="Big">
+        </a>    
+      </div>      
     </div>
   </div>
 </nav>
