@@ -20,8 +20,8 @@ export class FolderViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) { }
   selectedImage: Image = null;
-  isImageSize(size, img): boolean {
-    if (this.isSelectedImage(img)) {
+  isImageSize(size, img = null): boolean {
+    if (img !== null && this.isSelectedImage(img)) {
       return size === 3;
     }
     return this.imageSizeService.isImageSize(size);

@@ -16,6 +16,7 @@ export class FolderHierarchyService {
     return this.hierarchy[this.hierarchy.length - 1];
   }
   changeFolder(path): void {
+    path = decodeURI(path);
     this.hierarchy = [new Folder(this.dataUriService, '', true)];
 
     let cumulativePath = '';
