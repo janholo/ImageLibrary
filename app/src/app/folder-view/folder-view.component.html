@@ -3,7 +3,7 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li *ngFor="let folder of getFolderHierarchy(); let last = last" [ngClass]="{last: last}">
-          <a routerLink="{{folder.getRouterLink()}}" >
+          <a routerLink="{{folder.getRouterLink()}}">
             <p>{{folder.getName()}}</p>
           </a>
         </li>
@@ -11,37 +11,23 @@
     </nav>
     <section>
       <div class="columns is-mobile is-multiline">
-        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}" >
-          <div class="box">
-            <input type="file" name="img" multiple>  
-          </div>
+        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}">
+          <a class="box" (click)="fileUpload.isOpen=true">
+            <figure>
+              <p class="has-text-grey has-text-left is-size-7">Upload Files</p>
+              <img class="fillwidth" src="./assets/upload-files.png" alt="Upload Files" />
+            </figure>
+          </a>
         </div>
-        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}" >
-          <div class="box">
-            <div class="file is-boxed">
-              <label class="file-label">
-                <input class="file-input" type="file" name="resume">
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                  </span>
-                  <span class="file-label">
-                    Choose a file…
-                  </span>
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}" >
-          <a class="box" (click)="createFolder()">
+        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}">
+          <a class="box" (click)="isCreateFolderOpen=true">
             <figure>
               <p class="has-text-grey has-text-left is-size-7">Create Folder</p>
               <img class="fillwidth" src="./assets/new-folder.png" alt="Create Folder" />
             </figure>
           </a>
         </div>
-        <div class="column" *ngFor="let img of getImages()" [ngClass]="{'is-2': isImageSize(0,img), 'is-3': isImageSize(1,img), 'is-6': isImageSize(2,img), 'is-12': isImageSize(3,img)}" >
+        <div class="column" *ngFor="let img of getImages()" [ngClass]="{'is-2': isImageSize(0,img), 'is-3': isImageSize(1,img), 'is-6': isImageSize(2,img), 'is-12': isImageSize(3,img)}">
           <a class="box" (click)="selectElement(img)">
             <figure>
               <p class="has-text-grey has-text-left is-size-7">{{img.getName()}}</p>
@@ -53,4 +39,23 @@
       </div>
     </section>
   </div>
+  <div class="modal" [ngClass]="{'is-active': isCreateFolderOpen}">
+    <div class="modal-background" (click)="isCreateFolderOpen=false"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Create new folder</p>
+        <button class="delete" aria-label="close" (click)="isCreateFolderOpen=false"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="control">
+          <input #folderName class="input" type="text" placeholder="Name" (keyup.enter)="createFolder(folderName.value)">
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" (click)="isCreateFolderOpen=false">Create Folder</button>
+        <button class="button" (click)="createFolder(folderName.value)">Cancel</button>
+      </footer>
+    </div>
+  </div>
+  <app-file-upload #fileUpload></app-file-upload>
 </div>

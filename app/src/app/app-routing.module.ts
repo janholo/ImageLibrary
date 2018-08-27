@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { FolderViewComponent } from './folder-view/folder-view.component';
 import { RawViewComponent } from './raw-view/raw-view.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 export function folderviewMatcher(url: UrlSegment[]) {
   return url.length >= 1 && url[0].path === 'folderview' ? ({consumed: url}) : null;

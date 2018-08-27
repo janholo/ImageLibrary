@@ -1,0 +1,37 @@
+  <div class="modal" [ngClass]="{'is-active': isOpen}">
+    <div class="modal-background" (click)="isOpen=false"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Upload Files</p>
+        <button class="delete" aria-label="close" (click)="isOpen=false"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field" *ngIf="filePaths==null">
+          <label class="label">Select files to upload</label>
+          <div class="control">
+            <div class="file">
+              <label class="file-label">
+                <input #fileInput class="file-input" type="file" multiple (input)="filesChanged(fileInput.files)">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label">
+                    Choose files…
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+          <label *ngFor="let file of fileUploads" class="label" >{{file.name}}
+            <progress class="progress" value="{{file.progress}}" max="100"></progress>
+          </label>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success" [ngClass]="{'is-loading': isUploading}" (click)="upload()" [attr.disabled]="filePaths==null || isUploading ? '' : null">Upload selected files</button>
+        <button class="button" (click)="filePaths=null; fileUploads=null" [attr.disabled]="filePaths==null || isUploading ? '' : null">Clear</button>
+      </footer>
+    </div>
+  </div>
+  

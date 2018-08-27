@@ -20,6 +20,7 @@ export class FolderViewComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) { }
   selectedImage: Image = null;
+  isCreateFolderOpen: Boolean = false;
   isImageSize(size, img = null): boolean {
     if (img !== null && this.isSelectedImage(img)) {
       return size === 3;
@@ -35,7 +36,6 @@ export class FolderViewComponent implements OnInit {
   getImages(): Image[] {
     return this.imageService.getImages();
   }
-
   selectElement(el: Image) {
     if (el.type === ImageType.Folder) {
       this.router.navigate([el.getName()], {relativeTo : this.route});
@@ -48,6 +48,9 @@ export class FolderViewComponent implements OnInit {
     } else {
       window.open(el.getSourcePath(), '_blank');
     }
+  }
+  createFolder(name: string) {
+    this.isCreateFolderOpen = false;
   }
 
   ngOnInit() {
