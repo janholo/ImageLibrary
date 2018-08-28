@@ -1,0 +1,110 @@
+swagger: "2.0"
+info:
+  description: "Rest Api to abstract a file system"
+  version: "1.0.0"
+  title: "ImageFileApi"
+host: localhost:31415
+basePath: /v1
+schemes:
+  - http
+tags:
+- name: "preview"
+  description: "Get previews of the files (readonly)"
+- name: "files"
+  description: "Get, Create, Update, Delete Files"
+- name: "dirs"
+  description: "Directories information"
+paths:
+  /preview/{filePath}:
+    get:
+      tags:
+      - "preview"
+      description: "Get preview of image file"
+      operationId: "getPreview"
+      parameters:
+      - in: "path"  
+        name: "filePath"
+        type: string
+        required: true
+        description: "Path to the image"
+      produces: 
+        - image/png
+      responses:
+        200:
+          description: Preview as png file
+          schema:
+            type: file
+        400:
+          description: "File is no image"
+        404:
+          description: "File not found"
+  /file/{filePath}:
+    get:
+      tags:
+      - "files"
+      description: "Get image file"
+      operationId: "getFile"
+      parameters:
+      - in: "path"  
+        name: "filePath"
+        type: string
+        required: true
+        description: "Path to the image"
+      produces: 
+        - image/png
+        - image/jpeg
+      responses:
+        200:
+          description: Image as png/jpeg file
+          schema:
+            type: file
+        400:
+          description: "File is no image"
+        404:
+          description: "File not found"
+  /dirs/{filePath}:
+    get:
+      tags:
+      - "dirs"
+      description: "Get directory information"
+      operationId: "getDirectory"
+      parameters:
+      - in: "path"  
+        name: "filePath"
+        type: string
+        required: true
+        description: "Path to the directory"
+      produces:
+        - application/json        
+      responses:
+        200:
+          description: Directory information json object
+          schema:
+            $ref: '#/definitions/DirectoryInfo'
+        404:
+          description: "Directory not found"
+definitions:
+  FileInfo:
+    type: "object"
+    properties:
+      path:
+        type: "string"
+      fileType:
+        type: "string"
+        enum:
+        - "image"
+        - "video"
+        - "other"
+  DirectoryInfo:
+    type: "object"
+    properties:
+      path:
+        type: "string"
+      files:
+        type: "array"
+        items:
+          $ref: '#/definitions/FileInfo'
+      childDirs:
+        type: "array"
+        items:
+          type: "string"
