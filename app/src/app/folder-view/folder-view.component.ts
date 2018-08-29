@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ImageSizeService, ImageSize } from '../image-size.service';
 import { FolderHierarchyService } from '../folder-hierarchy.service';
 import { Folder } from '../folder';
-import { Image, ImageType } from '../image';
-import { ImageService } from '../image.service';
+import { Entity, EntityType } from '../entity';
+import { EntityService } from '../entity.service';
 
 @Component({
   selector: 'app-folder-view',
@@ -16,10 +16,10 @@ import { ImageService } from '../image.service';
 export class FolderViewComponent implements OnInit {
   constructor(private imageSizeService: ImageSizeService,
               private folderHierarchyService: FolderHierarchyService,
-              private imageService: ImageService,
+              private imageService: EntityService,
               private route: ActivatedRoute,
               private router: Router) { }
-  selectedImage: Image = null;
+  selectedImage: Entity = null;
   isCreateFolderOpen: Boolean = false;
   isImageSize(size, img = null): boolean {
     if (img !== null && this.isSelectedImage(img)) {
@@ -33,13 +33,13 @@ export class FolderViewComponent implements OnInit {
   getFolderHierarchy(): Folder[] {
     return this.folderHierarchyService.getHierarchy();
   }
-  getImages(): Image[] {
-    return this.imageService.getImages();
+  getImages(): Entity[] {
+    return this.imageService.getEntities();
   }
-  selectElement(el: Image) {
-    if (el.type === ImageType.Folder) {
+  selectElement(el: Entity) {
+    if (el.type === EntityType.folder) {
       this.router.navigate([el.getName()], {relativeTo : this.route});
-    } else if (el.type === ImageType.Image) {
+    } else if (el.type === EntityType.image) {
       if (this.isSelectedImage(el)) {
         this.selectedImage = null;
       } else {

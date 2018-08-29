@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Folder } from './folder';
-import { FolderInfo } from './folder-info';
+import { FolderModel } from './folder-model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FolderInfoLoaderService {
-  info: FolderInfo;
+  info: FolderModel;
   load(folder: Folder): void {
-    this.info = {files: [], subDirectories: [], name: '', previewPath: '', sourcePath: ''};
-    let infoFileUri = folder.getPreviewPath();
-    infoFileUri += '/info.json';
+    this.info = {path: '', files: [], childFolders: []};
+    const infoFileUri = environment.fileSystemApiUrl + '/folders/' + folder.path;
 
-    this.http.get<FolderInfo>(infoFileUri).subscribe((data: FolderInfo) => this.info = { ...data});
+    this.http.get<FolderModel>(infoFileUri).subscribe((data: FolderModel) => this.info = { ...data});
   }
   constructor(private http: HttpClient) { }
 }

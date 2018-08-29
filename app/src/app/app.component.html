@@ -15,9 +15,6 @@
         <a class="navbar-item" routerLink="/folderview" routerLinkActive="is-active">
           Folder View
         </a>
-        <a class="navbar-item" routerLink="/rawview" routerLinkActive="is-active">
-          Raw View
-        </a>
       </div>
       <div class="navbar-end is-hidden-touch">
         <a class="navbar-item" [ngClass]="{'is-active': isImageSize(0)}" (click)="setImageSize(0)">

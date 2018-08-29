@@ -36,7 +36,7 @@ namespace FileSystemApi.Services
             return new FileHandle(absolutePath, _previewService);
         }
 
-        public DirectoryModel GetDirectoryInfo(string path)
+        public FolderModel GetFolderInfo(string path)
         {
             string absolutePath = Path.Combine(_rootPath, path);
 
@@ -45,10 +45,10 @@ namespace FileSystemApi.Services
                 return null;
             }            
 
-            var dirInfo = new DirectoryModel()
+            var folderInfo = new FolderModel()
             {
                 Path = path,
-                ChildDirs = Directory.EnumerateDirectories(absolutePath)
+                ChildFolders = Directory.EnumerateDirectories(absolutePath)
                                      .Select(s => ToRelativePath(s))
                                      .Where(s => !string.Equals(s, _previewFolderPath, StringComparison.OrdinalIgnoreCase))
                                      .ToList(),
@@ -57,7 +57,7 @@ namespace FileSystemApi.Services
                                      .ToList()
             };
 
-            return dirInfo;
+            return folderInfo;
         }
 
         private string ToRelativePath(string path)

@@ -34,12 +34,7 @@ namespace FileSystemApi.Controllers
             {
                 return NotFound();
             }
-
-            if(file.IsImage == false)
-            {
-                return BadRequest();
-            }
-            
+          
             return PhysicalFile(file.Path, file.ContentType);
         }
     }

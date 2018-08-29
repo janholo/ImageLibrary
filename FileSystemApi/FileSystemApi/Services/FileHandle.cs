@@ -31,6 +31,10 @@ namespace FileSystemApi.Services
                 IsImage = true;
                 ContentType = contentType;
             }
+            else
+            {
+                ContentType = "application/octet-stream";
+            }
         }
         
         public string Path { get; }

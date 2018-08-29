@@ -17,31 +17,31 @@ namespace FileSystemApi.Controllers
 {
     [Route("v1/[controller]")]
     [ApiController] 
-    public class DirsController : ControllerBase
+    public class FoldersController : ControllerBase
     {
         private FileSystemService _fileSystemService;
 
-        public DirsController(FileSystemService fileSystemService)
+        public FoldersController(FileSystemService fileSystemService)
         {
             _fileSystemService = fileSystemService;
         }
 
         [HttpGet("{*path}")]
-        public virtual IActionResult GetDirectory([FromRoute]string path)
+        public virtual IActionResult GetFolder([FromRoute]string path)
         {
             if(path == null)
             {
                 path = "";
             }
 
-            var directoryInfo = _fileSystemService.GetDirectoryInfo(path);
+            var folderInfo = _fileSystemService.GetFolderInfo(path);
 
-            if(directoryInfo == null)
+            if(folderInfo == null)
             {
                 return NotFound();
             }
 
-            return Ok(directoryInfo);
+            return Ok(folderInfo);
         }
     }
 }
