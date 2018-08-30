@@ -21,6 +21,11 @@ namespace FileSystemApi.Services
 
         public PreviewService(IConfiguration configuration, ILogger<PreviewService> logger)
         {
+            if(Directory.Exists(configuration["RootFileSystemPath"]) == false)
+            {
+                throw new ArgumentException("Invalid RootFileSystemPath in appsettings.json!");
+            }
+
             _previewTempPath = Path.Combine(configuration["RootFileSystemPath"], configuration["RelativePreviewPath"]);
             Directory.CreateDirectory(_previewTempPath);
 
