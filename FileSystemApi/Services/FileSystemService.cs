@@ -63,8 +63,6 @@ namespace FileSystemApi.Services
         private string ToRelativePath(string path)
         {
             string relPath = Path.GetRelativePath(_rootPath, path);
-            _logger.LogInformation("Old path: " + path + ", new path: " + relPath);
-
             return relPath;
         }
     }
