@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using FileSystemApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 namespace FileSystemApi
 {
@@ -36,6 +38,15 @@ namespace FileSystemApi
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger)
         {
             logger.LogInformation("Hosting environment: " + env.EnvironmentName);
+            logger.LogInformation("Content root path: " + env.ContentRootPath);
+            IServerAddressesFeature feature = app.ServerFeatures.FirstOrDefault(s => s.Value is IServerAddressesFeature).Value as IServerAddressesFeature;
+            if(feature != null)
+            {
+                foreach(var address in feature.Addresses)
+                {
+                    logger.LogInformation("Now listening on: " + address);
+                }
+            }
 
             if (env.IsDevelopment())
             {
