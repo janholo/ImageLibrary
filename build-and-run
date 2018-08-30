@@ -1,6 +1,14 @@
 #/bin/sh
-cd webpage/
+echo "Build and Start App"
+cd app/
 
-cd FileSystemApi
-docker build -t filesystemapi
-docker run -d -p 8080:80 --name filesystemapi-container filesystemapi
+
+cd ../
+echo "Build and Start FileSystemApi"
+cd FileSystemApi/
+echo "-build docker image"
+docker build -t filesystemapi .
+echo "-remove old docker container"
+docker container rm fsa -f
+echo "-start docker container"
+docker run -d -p 8080:80 --name fsa filesystemapi

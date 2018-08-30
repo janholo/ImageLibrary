@@ -16,4 +16,8 @@ RUN dotnet publish "FileSystemApi.csproj" -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+
+WORKDIR /data
+
+WORKDIR /app
 ENTRYPOINT ["dotnet", "FileSystemApi.dll"]
