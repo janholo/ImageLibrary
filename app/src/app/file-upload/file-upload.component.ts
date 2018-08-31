@@ -31,7 +31,7 @@ export class FileUploadComponent implements OnInit {
       this.fileUploads.push({ name: file.name, progress: 0 });
     }
   }
-  upload(val: FileList) {
+  upload() {
     this.isUploading = true;
   }
   ngOnInit() {
