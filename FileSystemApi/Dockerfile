@@ -18,6 +18,7 @@ WORKDIR /app
 COPY --from=publish /app .
 
 WORKDIR /data
+VOLUME /data
 
 WORKDIR /app
 ENTRYPOINT ["dotnet", "FileSystemApi.dll"]

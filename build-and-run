@@ -11,4 +11,4 @@ docker build -t filesystemapi .
 echo "-remove old docker container"
 docker container rm fsa -f
 echo "-start docker container"
-docker run -d -p 8080:80 --name fsa filesystemapi
+docker run -d -p 8080:80 --name fsa -v /home/pi/testData:/data  filesystemapi
