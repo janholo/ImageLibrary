@@ -1,7 +1,14 @@
 #/bin/sh
 echo "Build and Start App"
 cd app/
+echo "-build docker image"
+docker build -t imagelibrary .
+echo "-remove old docker container"
+docker container rm imagelibrary -f
+echo "-start docker container"
+docker run -d -p 80:80 --name imagelibrary imagelibrary
 
+exit
 
 cd ../
 echo "Build and Start FileSystemApi"
@@ -9,6 +16,6 @@ cd FileSystemApi/
 echo "-build docker image"
 docker build -t filesystemapi .
 echo "-remove old docker container"
-docker container rm fsa -f
+docker container rm filesystemapi -f
 echo "-start docker container"
-docker run -d -p 8080:80 --name fsa -v /home/pi/testData:/data  filesystemapi
+docker run -d -p 8080:80 --name filesystemapi -v /home/pi/testData:/data filesystemapi
