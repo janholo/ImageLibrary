@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Folder } from './folder';
-import { FolderInfoLoaderService } from './folder-info-loader.service';
+import { Folder } from '../models/folder';
+import { CurrentFolderService } from './current-folder.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { DataUriService } from './data-uri.service';
+import { FolderRepository } from '../repositories/folder-repository.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class FolderHierarchyService {
   }
   changeFolder(path): void {
     path = decodeURI(path);
-    this.hierarchy = [new Folder(this.dataUriService, '', true)];
+    this.hierarchy = [new Folder('')];
 
     let cumulativePath = '';
     const folders = path.split('/');
@@ -25,7 +25,7 @@ export class FolderHierarchyService {
     folders.forEach(element => {
       if (element !== '') {
         cumulativePath += element;
-        this.hierarchy.push(new Folder(this.dataUriService, cumulativePath));
+        this.hierarchy.push(new Folder(cumulativePath));
         cumulativePath += '/';
       }
     });
@@ -33,9 +33,9 @@ export class FolderHierarchyService {
     this.infoLoader.load(this.getCurrentFolder());
   }
 
-  constructor(private infoLoader: FolderInfoLoaderService,
-              private router: Router,
-              private dataUriService: DataUriService) {
+  constructor(private infoLoader: CurrentFolderService,
+              private folderRepository: FolderRepository,
+              private router: Router) {
     this.changeFolder('');
 
     router.events.subscribe((val) => {

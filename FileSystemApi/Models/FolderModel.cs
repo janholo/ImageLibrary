@@ -33,5 +33,19 @@ namespace FileSystemApi.Models
             sb.Append("}\n");
             return sb.ToString();
         }
+
+        public void CleanupPaths()
+        {
+            Path = CleanupPath(Path);
+
+            ChildFolders = ChildFolders.Select<string, string>(s => CleanupPath(s)).ToList();
+
+            Files = Files.Select<FileModel, FileModel>(f => new FileModel(CleanupPath(f.Path))).ToList();
+        }
+
+        public string CleanupPath(string path)
+        {
+            return path.Replace('\\', '/');
+        }
     }
 }

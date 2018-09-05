@@ -43,5 +43,29 @@ namespace FileSystemApi.Controllers
 
             return Ok(folderInfo);
         }
+
+        [HttpPut("{*path}")]
+        public virtual IActionResult CreateFolder([FromRoute]string path)
+        {
+            if(path == null)
+            {
+                return BadRequest("Cannot create root folder!");
+            }
+
+            var folderInfo = _fileSystemService.GetFolderInfo(path);
+
+            if(folderInfo != null)
+            {
+                return BadRequest("Folder already exists!");
+            }
+
+            if(_fileSystemService.CreateFolder(path) == false)
+            {
+                return BadRequest("Unknown error - could not create folder!");
+            }
+
+            return Ok();
+        }
+
     }
 }

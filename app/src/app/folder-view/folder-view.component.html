@@ -10,7 +10,30 @@
       </ul>
     </nav>
     <section>
-      <div class="columns is-mobile is-multiline">
+      <div *ngIf="isFolderLoaded() == false" class="columns is-mobile is-multiline ">
+        <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}">
+            <a class="box" >
+              <figure>
+                <p class="has-text-grey has-text-left is-size-7">Loading...</p>
+                <div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                  </div>
+              </figure>
+            </a>
+          </div>        
+      </div>
+      <div *ngIf="isFolderLoaded()" class="columns is-mobile is-multiline ">
         <div class="column" [ngClass]="{'is-2': isImageSize(0), 'is-3': isImageSize(1), 'is-6': isImageSize(2), 'is-12': isImageSize(3)}">
           <a class="box" (click)="fileUpload.isOpen=true">
             <figure>
@@ -31,8 +54,8 @@
           <a class="box" (click)="selectElement(img)">
             <figure>
               <p class="has-text-grey has-text-left is-size-7">{{img.getName()}}</p>
-              <img *ngIf="isSelectedImage(img)" class="fillwidth" src="{{img.getSourcePath()}}" alt="{{img.getSourcePath()}}" />
-              <img *ngIf="!isSelectedImage(img)" class="fillwidth" src="{{img.getPreviewPath()}}" alt="{{img.getPreviewPath()}}" />
+              <img *ngIf="isSelectedImage(img)" class="fillwidth" src="{{img.sourcePath}}" alt="{{img.sourcePath}}" />
+              <img *ngIf="!isSelectedImage(img)" class="fillwidth" src="{{img.previewPath}}" alt="{{img.previewPath}}" />
             </figure>
           </a>
         </div>
@@ -52,8 +75,8 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" (click)="isCreateFolderOpen=false">Create Folder</button>
-        <button class="button" (click)="createFolder(folderName.value)">Cancel</button>
+        <button class="button is-success" (click)="createFolder(folderName.value)">Create Folder</button>
+        <button class="button" (click)="isCreateFolderOpen=false">Cancel</button>
       </footer>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ImageSizeService } from './image-size.service';
+import { ImageSizeService } from './services/image-size.service';
 
 @Component({
   selector: 'app-root',

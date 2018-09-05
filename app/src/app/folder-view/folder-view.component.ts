@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ImageSizeService, ImageSize } from '../image-size.service';
-import { FolderHierarchyService } from '../folder-hierarchy.service';
-import { Folder } from '../folder';
-import { Entity, EntityType } from '../entity';
-import { EntityService } from '../entity.service';
+import { ImageSizeService, ImageSize } from '../services/image-size.service';
+import { FolderHierarchyService } from '../services/folder-hierarchy.service';
+import { Folder } from '../models/folder';
+import { Entity, EntityType } from '../models/entity';
+import { EntityService } from '../services/entity.service';
+import { CurrentFolderService } from '../services/current-folder.service';
 
 @Component({
   selector: 'app-folder-view',
@@ -17,6 +18,7 @@ export class FolderViewComponent implements OnInit {
   constructor(private imageSizeService: ImageSizeService,
               private folderHierarchyService: FolderHierarchyService,
               private imageService: EntityService,
+              private currentFolderService: CurrentFolderService,
               private route: ActivatedRoute,
               private router: Router) { }
   selectedImage: Entity = null;
@@ -33,6 +35,9 @@ export class FolderViewComponent implements OnInit {
   getFolderHierarchy(): Folder[] {
     return this.folderHierarchyService.getHierarchy();
   }
+  isFolderLoaded(): boolean {
+    return this.currentFolderService.folderContent != null;
+  }
   getImages(): Entity[] {
     return this.imageService.getEntities();
   }
@@ -46,10 +51,11 @@ export class FolderViewComponent implements OnInit {
         this.selectedImage = el;
       }
     } else {
-      window.open(el.getSourcePath(), '_blank');
+      window.open(el.sourcePath, '_blank');
     }
   }
   createFolder(name: string) {
+    this.currentFolderService.createFolder(name);
     this.isCreateFolderOpen = false;
   }
 
