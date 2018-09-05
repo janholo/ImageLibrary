@@ -13,7 +13,7 @@ export class CurrentFolderService {
 
     this.folderRepository.LoadFolderContent(folder.path, (data: FolderModel) => this.folderContent = { ...data});
   }
-  private reload(): void {
+  reload(): void {
     this.load(new Folder(this.folderContent.path));
   }
   createFolder(name: string) {

@@ -60,6 +60,8 @@ export class FileUploadComponent implements OnInit {
   }
   uploadDone() {
     this.isOpen = false;
+
+    this.currentFolderService.reload();
   }
   ngOnInit() {
   }

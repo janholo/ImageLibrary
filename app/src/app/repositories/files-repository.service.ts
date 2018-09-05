@@ -24,7 +24,11 @@ export class FilesRepository {
             if (event.type === HttpEventType.UploadProgress) {
                 fileUploadState.progress = 100 * event.loaded / event.total;
             }
-        }, error => fileUploadState.error = true, () => fileUploadState.isDone = true);
+        }, error => {
+            fileUploadState.error = true;
+            console.log(error);
+        },
+            () => fileUploadState.isDone = true);
 
         return observableRequest;
     }
