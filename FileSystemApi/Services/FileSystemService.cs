@@ -29,7 +29,7 @@ namespace FileSystemApi.Services
         {
             string absolutePath = Path.Combine(_rootPath, path);
 
-            if(File.Exists(absolutePath) == false)
+            if (File.Exists(absolutePath) == false)
             {
                 return null;
             }
@@ -41,10 +41,10 @@ namespace FileSystemApi.Services
         {
             string absolutePath = Path.Combine(_rootPath, path);
 
-            if(Directory.Exists(absolutePath) == false)
+            if (Directory.Exists(absolutePath) == false)
             {
                 return null;
-            }            
+            }
 
             var folderInfo = new FolderModel()
             {
@@ -63,18 +63,35 @@ namespace FileSystemApi.Services
             return folderInfo;
         }
 
+        public void DeleteFile(FileHandle file)
+        {
+            File.Delete(file.Path);
+        }
+
         public bool CreateFolder(string path)
         {
             string absolutePath = Path.Combine(_rootPath, path);
 
-            if(Directory.Exists(absolutePath))
+            if (Directory.Exists(absolutePath))
             {
                 return false;
             }
 
             Directory.CreateDirectory(absolutePath);
 
-            return true;  
+            return true;
+        }
+
+        public void DeleteFolder(string path)
+        {
+            string absolutePath = Path.Combine(_rootPath, path);
+
+            if (Directory.Exists(absolutePath) == false)
+            {
+                return;
+            }
+
+            Directory.Delete(absolutePath, true);
         }
 
         public void CreateFile(string path, Stream dataStream)
@@ -83,20 +100,20 @@ namespace FileSystemApi.Services
 
             string folder = Path.GetDirectoryName(absolutePath);
 
-            if(Directory.Exists(folder) == false)
+            if (Directory.Exists(folder) == false)
             {
                 _logger.LogError("Could not create file: " + path + " because folder: " + folder + " does not exist");
                 throw new FileSystemServiceException("Could not create file: " + path + " because folder: " + folder + " does not exist");
             }
 
-            if(File.Exists(absolutePath))
+            if (File.Exists(absolutePath))
             {
                 _logger.LogError("File: " + path + " does already exist");
                 throw new FileSystemServiceException("File: " + path + " does already exist");
 
             }
 
-            using(var f = new FileStream(absolutePath, FileMode.CreateNew))
+            using (var f = new FileStream(absolutePath, FileMode.CreateNew))
             {
                 dataStream.CopyTo(f);
             }

@@ -15,6 +15,22 @@
     height: auto;
 }
 
+.float-right {
+  float: right;
+}
+
+.show-hover-parent .show-hover-child { display: none; }
+
+.show-hover-parent:hover .show-hover-child {
+   display: block; 
+}
+
+.figure-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sk-circle {
     margin: 100px auto;
     width: 80px;

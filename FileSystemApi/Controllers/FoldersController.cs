@@ -67,5 +67,18 @@ namespace FileSystemApi.Controllers
             return Ok();
         }
 
+        [HttpDelete("{*path}")]
+        public virtual IActionResult DeleteFolder([FromRoute]string path)
+        {
+            if(string.IsNullOrWhiteSpace(path))
+            {
+                return BadRequest("Cannot delete root directory");
+            }
+
+            _fileSystemService.DeleteFolder(path);
+
+            return Ok();
+        }        
+
     }
 }

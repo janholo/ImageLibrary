@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class FolderRepository {
+  DeleteFolder(path: string): any {
+    const url = environment.fileSystemApiUrl + '/folders/' + path;
+    return this.http.delete(url);
+  }
   CreateFolder(pathToFolder: string): Observable<{}> {
     const requestUri = environment.fileSystemApiUrl + '/folders/' + pathToFolder;
 

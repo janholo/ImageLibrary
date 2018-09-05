@@ -56,8 +56,23 @@ namespace FileSystemApi.Controllers
             {
                 return BadRequest(e);
             }
-            
+
             return Ok();
-        }   
+        }
+
+        [HttpDelete("{*path}")]
+        public virtual IActionResult DeleteFile([FromRoute][Required]string path)
+        {
+            FileHandle file = _fileSystemService.GetFileHandle(path);
+
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            _fileSystemService.DeleteFile(file);
+
+            return Ok();
+        }
     }
 }

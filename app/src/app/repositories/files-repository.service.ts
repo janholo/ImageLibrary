@@ -9,6 +9,10 @@ import { share } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class FilesRepository {
+  DeleteFile(path: string) {
+    const url = environment.fileSystemApiUrl + '/files/' + path;
+    return this.http.delete(url);
+  }
     UploadFile(folderPath: string, fileUploadState: FileUploadState): Observable<HttpEvent<{}>> {
         const url = environment.fileSystemApiUrl + '/files/' + folderPath + '/' + fileUploadState.file.name;
 
