@@ -13,6 +13,10 @@ export class Entity {
                 ) {
     }
     getName(): string {
+        if (this.path === null) {
+            return null;
+        }
+
         const l = this.path.split('/');
         return l[l.length - 1];
     }

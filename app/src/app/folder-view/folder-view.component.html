@@ -112,20 +112,31 @@
     </div>
   </div>
   <div class="modal" [ngClass]="{'is-active': isDeleteFolderOpen}">
-      <div class="modal-background" (click)="isDeleteFolderOpen=false"></div>
-      <div class="modal-card">
-        <header class="modal-card-head">
-          <p class="modal-card-title">Delete folder</p>
-          <button class="delete" (click)="isDeleteFolderOpen=false"></button>
-        </header>
-        <section class="modal-card-body">
-          Delete folder <strong>"{{entityToDelete.path}}"</strong>?
-        </section>
-        <footer class="modal-card-foot">
-          <button class="button is-danger" (click)="deleteFolder(entityToDelete)">Delete!</button>
-          <button class="button" (click)="isDeleteFolderOpen=false">Cancel</button>
-        </footer>
-      </div>
+    <div class="modal-background" (click)="isDeleteFolderOpen=false"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete folder: <i>{{entityToDelete.getName()}}</i> ?</p>
+        <button class="delete" (click)="isDeleteFolderOpen=false"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">Type folder name to confirm:</label>
+          <div class="control has-icons-left has-icons-right">
+            <input #inp class="input" (keyup)="0" [ngClass]="{'is-success': inp.value===entityToDelete.getName(), 'is-danger': inp.value!==entityToDelete.getName()}" type="text" placeholder="{{entityToDelete.getName()}}" >
+            <span class="icon is-small is-left">
+              <i class="fas fa-folder"></i>
+            </span>
+            <span *ngIf="inp.value===entityToDelete.getName()" class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger" (click)="deleteFolder(entityToDelete)" [disabled]="inp.value!==entityToDelete.getName()">Delete!</button>
+        <button class="button" (click)="isDeleteFolderOpen=false">Cancel</button>
+      </footer>
     </div>
+  </div>
   <app-file-upload #fileUpload></app-file-upload>
 </div>

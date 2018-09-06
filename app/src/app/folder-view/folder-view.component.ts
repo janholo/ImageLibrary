@@ -29,7 +29,7 @@ export class FolderViewComponent implements OnInit {
   isCreateFolderOpen: Boolean = false;
   isDeleteFileOpen: Boolean = false;
   isDeleteFolderOpen: Boolean = false;
-  entityToDelete: Entity;
+  entityToDelete: Entity = new Entity(null, EntityType.other, null, null);
   isImageSize(size, img = null): boolean {
     if (img !== null && this.isSelectedImage(img)) {
       return size === 3;
