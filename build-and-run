@@ -9,7 +9,7 @@ docker build -t filesystemapi .
 echo "-remove old docker container"
 docker container rm filesystemapi -f
 echo "-start docker container"
-docker run -d --network il-net --name filesystemapi -v /home/pi/testData:/data filesystemapi
+docker run -d --network il-net --name filesystemapi -v /media/cloudstorage:/data filesystemapi
 
 cd ../
 echo "Build and Start App"
