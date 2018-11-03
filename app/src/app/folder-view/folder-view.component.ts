@@ -50,7 +50,7 @@ export class FolderViewComponent implements OnInit {
   }
   selectElement(el: Entity) {
     if (el.type === EntityType.folder) {
-      this.router.navigate([el.getName()], { relativeTo: this.route });
+      this.router.navigate(['folderview/' + el.path]);
     } else if (el.type === EntityType.image) {
       if (this.isSelectedImage(el)) {
         this.selectedImage = null;
